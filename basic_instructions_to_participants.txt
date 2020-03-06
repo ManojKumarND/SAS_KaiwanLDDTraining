@@ -1,0 +1,40 @@
+
+Hello All,
+
+-------------------------------------------
+INSTRUCTIONS to Participants
+-------------------------------------------
+You will be provided with a custom Linux VM, either via a URL, or, 
+simply on a USB pendrive. Copy it to your host system.
+The custom VM contains all - and more - required tools, apps,
+useful utils, etc.
+
+Each participant will download an encrypted courseware zip file (PDFs and
+source code), along with a customized and tuned Virtual Machine (that we
+brand as 'Seawolf'). It should contain all required packages and dependencies,
+making your code experience easier. A lot of useful utilities, packages,
+toolchains and small projects are packed in too
+(for example, see the ~/kaiwanTECH/usefulsnips directory in the Seawolf VM).
+
+Instructions for downloading and using the courseware zip file are here:
+ get_courseware.txt
+
+---------------------------------------
+Installing the 'Seawolf Dev' VM
+---------------------------------------
+Very simple:
+a) extract the content of the (large) 7zip file in the download
+b) ensure VirtualBox is installed on your host system
+c) to open the VM in VirtualBox, just double-click on the
+'Seawolf_Dev_<ver>.vbox' VBox configuration file. The VM
+should open in VirtualBox
+d) Highlight the Seawolf Dev VM in VirtualBox and click on the 'Start' button.
+
+
+*** TIP / V IMP ***
+Pl Ensure that Virtualization Extension (VT-x) support is enabled in your
+system BIOS!
+
+
+In case you face issues, please read the short "Seawolf Dev VM - Troubleshooting Tips"
+PDF document provided.
