@@ -1,0 +1,54 @@
+----------
+File I/O:
+----------
+ext3_file_operations:             (and ext2, ext4)
+  .read       = do_sync_read,
+  .write      = do_sync_write,
+
+do_sync_read -> (calls) filp->f_op->aio_read
+
+ext3_file_operations:
+   .aio_read   = generic_file_aio_read,
+   .aio_write  = generic_file_aio_write,
+
+mm/filemap.c: (!)
+generic_file_aio_read -> do_generic_file_read :
+
+ "This is a generic file read routine, and uses the
+ mapping->a_ops->readpage() function for the actual low-level stuff."
+
+Looks for a hit in the page cache:
+
+find_page:
+        page = find_get_page(mapping, index);
+
+If found: 
+        "/*
+         * Ok, we have the page, and it's up-to-date, so
+         * now we can copy it to user space..."
+...
+
+If not found:
+
+no_cached_page:
+        /*
+         * Ok, it wasn't cached, so we need to create a new
+         * page..
+         */
+        page = page_cache_alloc_cold(mapping);
+...
+   add_to_page_cache_lru()
+...
+   goto readpage;
+...
+ readpage:
+        /*
+         * A previous I/O error may have been due to temporary
+         * failures, eg. multipath errors.
+         * PG_error will be set again if readpage fails.
+         */
+        ClearPageError(page);
+        /* Start the actual read. The read will unlock the page. */
+        error = mapping->a_ops->readpage(filp, page);
+...
+
